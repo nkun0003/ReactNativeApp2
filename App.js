@@ -75,13 +75,13 @@ export default function App() {
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} // Pull-to-refresh functionality
         />
 
-        {/* Floating Action Button (FAB) */}
+        {/* This is my floating Action Button (FAB) */}
         <FAB
           style={styles.fab}
           icon="plus"
           size={30}
           color="#fff"
-          onPress={fetchOneMoreUser} // Fetch one more user when pressed the fab button
+          onPress={fetchOneMoreUser} // Calling the function to etch one more user when pressed the fab button
         />
 
         <StatusBar style="auto" />
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     padding: 15
   },
   userContainer: {
-    flexDirection: 'row', // Horizontal layout
+    flexDirection: 'row',
     padding: 10,
     marginVertical: 5,
     backgroundColor: '#f9f9f9',
