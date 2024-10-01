@@ -33,3 +33,10 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+.DS_Store
+node_modules/
+.vscode/
+.prettierrc
+.env
+
