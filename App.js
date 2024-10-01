@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Platform, RefreshControl } from 'react-native'; // Import APIs
+import { StyleSheet, Text, View, FlatList, Platform, RefreshControl, Image } from 'react-native'; // Import APIs
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import UserAvatar from 'react-native-user-avatar'; // Avatar component for profile images
-import { FAB } from 'react-native-paper'; // Floating Action Button (FAB)
-import Entypo from '@expo/vector-icons/Entypo';
+import UserAvatar from 'react-native-user-avatar';
+import { FAB } from 'react-native-paper';
 
 export default function App() {
   const [users, setUsers] = useState([]); // State to hold the user data
@@ -15,7 +14,7 @@ export default function App() {
     fetchUsers();
   }, []);
 
-  // Function to fetch users from API using fetch instead of axios
+  // Function to fetch users from API using built in fetch
   const fetchUsers = async () => {
     try {
       const response = await fetch('https://random-data-api.com/api/v2/users?size=10'); // Fetch API call
@@ -49,16 +48,12 @@ export default function App() {
     return (
       <View style={styles.userContainer}>
         {/* Conditional rendering based on platform */}
-        {Platform.OS === 'android' && (
-          <UserAvatar size={50} name={`${item.first_name} ${item.last_name}`} />
-        )}
+        {Platform.OS === 'android' && <UserAvatar size={50} src={item.avatar} />}
         <View style={styles.nameContainer}>
           <Text style={styles.firstName}>{item.first_name}</Text>
           <Text style={styles.lastName}>{item.last_name}</Text>
         </View>
-        {Platform.OS === 'ios' && (
-          <UserAvatar size={50} name={`${item.first_name} ${item.last_name}`} />
-        )}
+        {Platform.OS === 'ios' && <UserAvatar size={50} src={item.avatar} />}
       </View>
     );
   };
