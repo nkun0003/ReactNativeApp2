@@ -2,34 +2,36 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, Platform, RefreshControl } from 'react-native'; // Import APIs
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import axios from 'axios'; // For fetching data from API
 import UserAvatar from 'react-native-user-avatar'; // Avatar component for profile images
 import { FAB } from 'react-native-paper'; // Floating Action Button (FAB)
+import Entypo from '@expo/vector-icons/Entypo';
 
 export default function App() {
   const [users, setUsers] = useState([]); // State to hold the user data
   const [refreshing, setRefreshing] = useState(false); // State to handle pull-to-refresh
 
-  // Fetch 10 users when the app loads
+  // This hook will Fetch 10 users when the app loads
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  // Function to fetch users from API
+  // Function to fetch users from API using fetch instead of axios
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('https://random-data-api.com/api/v2/users?size=10');
-      setUsers(response.data); // Set fetched users in the state
+      const response = await fetch('https://random-data-api.com/api/v2/users?size=10'); // Fetch API call
+      const data = await response.json(); // Parse the JSON from the response
+      setUsers(data); // Set fetched users in the state
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
-  // Function to add one more user at the top of the list
+  // Function to add one more user at the top of the list using fetch
   const fetchOneMoreUser = async () => {
     try {
-      const response = await axios.get('https://random-data-api.com/api/v2/users?size=1');
-      setUsers([response.data, ...users]); // Here adding the new user at the top of the list
+      const response = await fetch('https://random-data-api.com/api/v2/users?size=1'); // Fetch API call
+      const data = await response.json(); // Parse the JSON from the response
+      setUsers([data, ...users]); // destructuring users to add the new user at the top of the list
     } catch (error) {
       console.error('Error fetching one more user:', error);
     }
@@ -46,7 +48,7 @@ export default function App() {
   const renderUser = ({ item }) => {
     return (
       <View style={styles.userContainer}>
-        {/* Here conditional rendering based on platform */}
+        {/* Conditional rendering based on platform */}
         {Platform.OS === 'android' && (
           <UserAvatar size={50} name={`${item.first_name} ${item.last_name}`} />
         )}
@@ -62,7 +64,7 @@ export default function App() {
   };
 
   // Key extractor function to ensure each item in the FlatList has a unique key
-  const keyExtractor = item => item.id.toString();
+  const keyExtractor = item => item.uid.toString(); // Using 'uid' as the unique key
 
   return (
     <SafeAreaProvider>
@@ -82,7 +84,9 @@ export default function App() {
         <FAB
           style={styles.fab}
           icon="plus"
-          onPress={fetchOneMoreUser} // Fetching one more user when pressed the fab button
+          size={30}
+          color="#fff"
+          onPress={fetchOneMoreUser} // Fetch one more user when pressed the fab button
         />
 
         <StatusBar style="auto" />
@@ -113,8 +117,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10
   },
   firstName: {
-    fontSize: 16,
-    fontWeight: 'bold'
+    fontSize: 16
+    // fontWeight: 'bold'
   },
   lastName: {
     fontSize: 14,
@@ -122,9 +126,9 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: 'absolute',
-    margin: 16,
+    margin: 15,
     right: 0,
-    bottom: 0,
+    bottom: 65,
     backgroundColor: '#008000'
   }
 });
