@@ -28,9 +28,9 @@ export default function App() {
   // Function to fetch users from API using built in fetch
   const fetchUsers = async () => {
     try {
-      const response = await fetch('https://random-data-api.com/api/v2/users?size=10'); // Fetch API call
+      const response = await fetch('https://random-data-api.com/api/v2/users?size=10'); // Fetching API call
       const data = await response.json(); // Parse the JSON from the response
-      setUsers(data); // Set fetched users in the state
+      setUsers(data); // Setting fetched users in the state
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -41,7 +41,7 @@ export default function App() {
     try {
       const response = await fetch('https://random-data-api.com/api/v2/users?size=1'); // Fetch API call
       const data = await response.json(); // Parse the JSON from the response
-      setUsers([data, ...users]); // destructuring users to add the new user at the top of the list
+      setUsers([data, ...users]); // destructuring the existing users (...) to add the new user at the top of the list
     } catch (error) {
       console.error('Error fetching one more user:', error);
     }
@@ -50,7 +50,7 @@ export default function App() {
   // Function to handle pull-to-refresh, fetching new users
   const onRefresh = async () => {
     setRefreshing(true);
-    await fetchUsers(); // calling fetchUsers function to fetch new users
+    await fetchUsers(); // calling fetchUsers function to fetch new users when refreshing
     setRefreshing(false);
   };
 
@@ -86,7 +86,7 @@ export default function App() {
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} // Pull-to-refresh functionality
         />
 
-        {/* This is my floating Action Button (FAB) */}
+        {/* This is my floating Action Button (FAB) TouchableOpacity using materialIcons */}
         <TouchableOpacity style={styles.fab} onPress={fetchOneMoreUser}>
           <MaterialIcons name="add" size={55} color="white" />
         </TouchableOpacity>
