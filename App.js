@@ -76,7 +76,7 @@ export default function App() {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <View>
-          <Text style={styles.textStyle}>Welcome to the User List</Text>
+          <Text style={styles.titleStyling}>Welcome to the User List</Text>
         </View>
         {/* FlatList for displaying user data */}
         <FlatList
@@ -102,17 +102,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff'
   },
-  textStyle: {
-    padding: 15
+  titleStyling: {
+    paddingTop: 15
   },
   userContainer: {
     flexDirection: 'row',
     padding: 10,
-    marginVertical: 5,
-    backgroundColor: '#f9f9f9',
+    // marginVertical: 5,
+    // backgroundColor: '#f9f9f9',
     borderRadius: 5,
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    borderBottomWidth: 2,
+    borderBottomColor: '#ccc'
   },
   nameContainer: {
     flex: 1,
