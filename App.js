@@ -1,9 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Platform, RefreshControl, Image } from 'react-native'; // Import APIs
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Platform,
+  RefreshControl,
+  Image,
+  TouchableOpacity
+} from 'react-native'; // Import APIs
+
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import UserAvatar from 'react-native-user-avatar';
 import { FAB } from 'react-native-paper';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function App() {
   const [users, setUsers] = useState([]); // State to hold the user data
@@ -39,7 +50,7 @@ export default function App() {
   // Function to handle pull-to-refresh, fetching new users
   const onRefresh = async () => {
     setRefreshing(true);
-    await fetchUsers(); // Fetch new users
+    await fetchUsers(); // calling fetchUsers function to fetch new users
     setRefreshing(false);
   };
 
@@ -76,13 +87,9 @@ export default function App() {
         />
 
         {/* This is my floating Action Button (FAB) */}
-        <FAB
-          style={styles.fab}
-          icon="plus"
-          size={30}
-          color="#fff"
-          onPress={fetchOneMoreUser} // Calling the function to etch one more user when pressed the fab button
-        />
+        <TouchableOpacity style={styles.fab} onPress={fetchOneMoreUser}>
+          <MaterialIcons name="add" size={55} color="white" />
+        </TouchableOpacity>
 
         <StatusBar style="auto" />
       </SafeAreaView>
@@ -113,7 +120,6 @@ const styles = StyleSheet.create({
   },
   firstName: {
     fontSize: 16
-    // fontWeight: 'bold'
   },
   lastName: {
     fontSize: 14,
@@ -122,8 +128,9 @@ const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     margin: 15,
-    right: 0,
+    right: 15,
     bottom: 65,
-    backgroundColor: '#008000'
+    backgroundColor: '#008000',
+    borderRadius: 30
   }
 });
