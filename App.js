@@ -103,13 +103,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   titleStyling: {
-    paddingTop: 15
+    paddingTop: 15,
+    marginHorizontal: 10
   },
   userContainer: {
     flexDirection: 'row',
     padding: 10,
-    // marginVertical: 5,
-    // backgroundColor: '#f9f9f9',
+    marginVertical: 5,
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'space-between',
