@@ -13,7 +13,6 @@ import {
 
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import UserAvatar from 'react-native-user-avatar';
-import { FAB } from 'react-native-paper';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function App() {
@@ -59,12 +58,12 @@ export default function App() {
     return (
       <View style={styles.userContainer}>
         {/* Conditional rendering based on platform */}
-        {Platform.OS === 'android' && <UserAvatar size={50} src={item.avatar} />}
+        {Platform.OS === 'android' && <Image style={styles.avatar} source={{ uri: item.avatar }} />}
         <View style={styles.nameContainer}>
           <Text style={styles.firstName}>{item.first_name}</Text>
           <Text style={styles.lastName}>{item.last_name}</Text>
         </View>
-        {Platform.OS === 'ios' && <UserAvatar size={50} src={item.avatar} />}
+        {Platform.OS === 'ios' && <Image style={styles.avatar} source={{ uri: item.avatar }} />}
       </View>
     );
   };
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 10,
     marginVertical: 5,
-    borderRadius: 5,
+    marginHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'space-between',
     borderBottomWidth: 2,
@@ -126,6 +125,12 @@ const styles = StyleSheet.create({
   lastName: {
     fontSize: 14,
     color: '#666'
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 15,
+    backgroundColor: '#ccc'
   },
   fab: {
     position: 'absolute',
