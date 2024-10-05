@@ -85,7 +85,7 @@ export default function App() {
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />} // Pull-to-refresh functionality
         />
 
-        {/* This is my floating Action Button (FAB) TouchableOpacity using materialIcons */}
+        {/* This is my floating Action Button (FAB) used TouchableOpacity with materialIcons */}
         <TouchableOpacity style={styles.fab} onPress={fetchOneMoreUser}>
           <MaterialIcons name="add" size={55} color="white" />
         </TouchableOpacity>
